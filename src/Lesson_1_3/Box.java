@@ -11,9 +11,9 @@ class Box<T extends Fruit> {
     }
 
     void intersperseFruits(Box<T> anotherBox){
-        for (int i = 0; i < box.size(); i++) {
-            anotherBox.addFruit(this.box.get(0));
-            this.box.remove(0);
+        while (box.size()>0) {
+            anotherBox.addFruit(box.get(0));
+            box.remove(0);
         }
     }
 

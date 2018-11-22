@@ -6,13 +6,17 @@ class Box<T extends Fruit> {
 
     private ArrayList<T> box;
 
+    Box(ArrayList<T> box){
+        this.box = box;
+    }
+
     void addFruit(T fruit){
         this.box.add(fruit);
     }
 
-    void intersperseFruits(ArrayList<T> anotherBox){
+    void intersperseFruits(Box<T> anotherBox){
         for (int i = 0; i < box.size(); i++) {
-            anotherBox.add(this.box.get(0));
+            anotherBox.addFruit(this.box.get(0));
             this.box.remove(0);
         }
     }
@@ -24,14 +28,4 @@ class Box<T extends Fruit> {
     boolean compare(Box<?> anotherBox){
        return this.getWeight() == anotherBox.getWeight();
     }
-
-    public static void main(String[] args) {
-        Box<Apple> box = new Box<>();
-        box.addFruit(new Apple());
-        Box<Apple> box1 = new Box<>();
-        box.intersperseFruits(new ArrayList<>());
-        box.compare(box1);
-
-    }
-
 }

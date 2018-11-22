@@ -1,9 +1,10 @@
 package Lesson_1_3;
 
-class Apple extends Fruit {
-    private float m = 1.0f;
+class Apple implements Fruit {
+    private static float DEFAULT_WEIGHT = 1.0f;
 
-     float getM() {
-        return m;
+    @Override
+    public float getDefaultWeight() {
+        return DEFAULT_WEIGHT;
     }
 }

@@ -6,10 +6,6 @@ class Box<T extends Fruit> {
 
     private ArrayList<T> box;
 
-    Box(ArrayList<T> box){
-        this.box = box;
-    }
-
     void addFruit(T fruit){
         this.box.add(fruit);
     }

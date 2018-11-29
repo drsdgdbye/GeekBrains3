@@ -5,25 +5,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 
- class PrimitiveReaderMain {
+class PrimitiveReaderMain {
     public static void main(String[] args) {
         try (RandomAccessFile raf = new RandomAccessFile("test\\1.txt", "r");
              BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            int sheet = 1;
-            byte br[] = new byte[sheet];
-            String s;
-            while (true) {
-                System.out.println("введите номер страницы");
-                if (!(s = reader.readLine()).equals("end")) {
-                    raf.seek(sheet * Integer.parseInt(s));
-
-                    int x;
-                    while (raf.read() != -1) {
-                        System.out.println((char) raf.read());
-                    }
-
-
-                } else break;
+            int sheet = 1800;
+            String numberOfSheet;
+            while (!(numberOfSheet = reader.readLine()).equals("end")) {
+                raf.seek(sheet * Integer.parseInt(numberOfSheet));
+                for (int i = 0; i < sheet; i++) {
+                    System.out.print((char) raf.read());
+                }
+                System.out.println();
             }
         } catch (IOException e) {
             e.printStackTrace();

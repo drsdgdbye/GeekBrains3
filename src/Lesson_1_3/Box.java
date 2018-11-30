@@ -2,26 +2,16 @@ package Lesson_1_3;
 
 import java.util.ArrayList;
 
-class Box<T extends Fruit> {
+public class Box<T extends Fruit> {
+    ArrayList<T> arrayList = new ArrayList<>();
 
-    private ArrayList<T> box;
-
-    void addFruit(T fruit) {
-        this.box.add(fruit);
+    int getWeight(ArrayList<T> amount, int m) {
+        return amount.size() * amount.get(0).getM();
     }
 
-    void intersperseFruits(Box<T> anotherBox) {
-        while (box.size() > 0) {
-            anotherBox.addFruit(box.get(0));
-            box.remove(0);
+    boolean compare(Box<?> another) {
+        if (this.getWeight(ArrayList < ? > a,m) == another.getWeight(ArrayList a, m)){
+            return true;
         }
-    }
-
-    private float getWeight() {
-        return box.size() * (box.size() > 0 ? box.get(0).getDefaultWeight() : 0);
-    }
-
-    boolean compare(Box<?> anotherBox) {
-        return this.getWeight() == anotherBox.getWeight();
     }
 }

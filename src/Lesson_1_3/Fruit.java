@@ -1,5 +1,9 @@
 package Lesson_1_3;
 
-interface Fruit {
-    float getDefaultWeight();
-}
+ abstract class Fruit {
+     int m;
+
+     public int getM() {
+         return m;
+     }
+ }

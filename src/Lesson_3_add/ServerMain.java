@@ -1,6 +1,7 @@
 package Lesson_3_add;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -21,15 +22,29 @@ public class ServerMain {
             final Scanner in = new Scanner(socket.getInputStream());
             final PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             final Scanner console = new Scanner(System.in);
+            final ObjectInputStream pin = new ObjectInputStream(socket.getInputStream());
 
-            Thread t1 = new Thread(() -> {
-                while (true) {
-                    String str = in.nextLine();
-                    if (str.equals("/end")) {
-                        out.println("/end");
-                        break;
+
+            Thread t1 = new Thread(new Runnable() {
+             Player player;
+                @Override
+                public void run() {
+                    while (true) {
+                        String str = in.nextLine();
+                        if (str.equals("/end")) {
+                            out.println("/end");
+                            break;
+                        }
+                        System.out.println("Client " + str);
+                        try {
+                            player = (Player) pin.readObject();
+                            player.info();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
                     }
-                    System.out.println("Client " + str);
                 }
             });
             t1.start();

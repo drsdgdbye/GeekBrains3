@@ -1,7 +1,6 @@
 package Lesson_3_add;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -14,6 +13,7 @@ public class ClientMain {
 
             final Scanner in = new Scanner(socket.getInputStream());
             final PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            final ObjectOutput pout = new ObjectOutputStream(socket.getOutputStream());
             final Scanner console = new Scanner(System.in);
 
             Thread t1 = new Thread(new Runnable() {
@@ -40,6 +40,11 @@ public class ClientMain {
                         String str = console.nextLine();
                         System.out.println("Сообщение отправлено");
                         out.println(str);
+                        try {
+                            pout.writeObject(new Player("bob"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
 
                 }

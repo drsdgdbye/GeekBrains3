@@ -1,9 +1,10 @@
 package Lesson_1_3;
 
-public class Orange extends Fruit{
-    int m = 2;
-    @Override
-    public int getM() {
-        return m;
-    }
+ class Orange implements Fruit{
+     private static float DEFAULT_WEIGHT = 1.0f;
+
+     @Override
+     public float getDefaultWeight() {
+         return DEFAULT_WEIGHT;
+     }
 }

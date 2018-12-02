@@ -1,26 +1,25 @@
 package Lesson_4;
 
 public class Main {
-    private final Object lock = new Object();
     private volatile char currentLetter = 'A';
 
     public static void main(String[] args) {
-        Main w = new Main();
-        new Thread(() -> w.printA()).start();
-        new Thread(() -> w.printB()).start();
-        new Thread(() -> w.printC()).start();
+        Main main = new Main();
+        new Thread(() -> main.printA()).start();
+        new Thread(() -> main.printB()).start();
+        new Thread(() -> main.printC()).start();
     }
 
-    synchronized void printA() {
-        synchronized (lock) {
+    void printA() {
+        synchronized (this) {
             try {
                 for (int i = 0; i < 5; i++) {
                     while (currentLetter != 'A') {
-                        lock.wait();
+                        wait();
                     }
                     System.out.print("A");
                     currentLetter = 'B';
-                    lock.notifyAll();
+                    notifyAll();
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -28,16 +27,16 @@ public class Main {
         }
     }
 
-     void printB() {
-        synchronized (lock) {
+    void printB() {
+        synchronized (this) {
             try {
                 for (int i = 0; i < 5; i++) {
                     while (currentLetter != 'B') {
-                        lock.wait();
+                        wait();
                     }
                     System.out.print("B");
                     currentLetter = 'C';
-                    lock.notifyAll();
+                    notifyAll();
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -45,16 +44,16 @@ public class Main {
         }
     }
 
-     void printC() {
-        synchronized (lock) {
+    void printC() {
+        synchronized (this) {
             try {
                 for (int i = 0; i < 5; i++) {
                     while (currentLetter != 'C') {
-                        lock.wait();
+                        wait();
                     }
                     System.out.print("C");
                     currentLetter = 'A';
-                    lock.notifyAll();
+                    notifyAll();
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
